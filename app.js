@@ -7,7 +7,11 @@ const tourRouter = require('./routes/Tours/tourRoutes');
 const userRouter = require('./routes/Users/userRoutes');
 // Middleware ////////////////////////////////////
 // Loading the request body to the request,as JSON
-app.use(morgan('dev'));
+if (process.env.NODE_ENV === 'development') {
+  // logger will run only when we are in development mode
+  app.use(morgan('dev'));
+}
+
 app.use(express.json());
 // Middleware for serving all the static files that in the 'public' directory
 app.use(express.static(`${__dirname}/public`));
